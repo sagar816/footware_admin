@@ -71,18 +71,20 @@ class AddproductPage extends StatelessWidget {
                       children: [
                         Flexible(
                             child: DropDownBtn(
-                          items: ['Cafe1', 'Cafe2', 'Cafe3'],
-                          selectedItemText: 'Category',
+                          items: ['Boots', 'Shoe', 'Beach Shoes', 'High Heels'],
+                          selectedItemText: ctrl.category,
                           onSelected: (selectedValue) {
-                            print(selectedValue);
+                            ctrl.category = selectedValue ?? 'general';
+                            ctrl.update();
                           },
                         )),
                         Flexible(
                             child: DropDownBtn(
-                          items: ['Brand1', 'Brand2', 'Brand3'],
-                          selectedItemText: 'Brand',
+                          items: ['Puma', 'Sketchers', 'Adidas', 'Clarks'],
+                          selectedItemText: ctrl.brand,
                           onSelected: (selectedValue) {
-                            print(selectedValue);
+                            ctrl.brand = selectedValue ?? 'un - branded';
+                            ctrl.update();
                           },
                         )),
                       ],
@@ -92,9 +94,11 @@ class AddproductPage extends StatelessWidget {
                     SizedBox(height: 10),
                     DropDownBtn(
                       items: ['true', 'false'],
-                      selectedItemText: "Offer ?",
+                      selectedItemText: ctrl.offer.toString(),
                       onSelected: (selectedValue) {
-                        print(selectedValue);
+                        ctrl.offer =
+                            bool.tryParse(selectedValue ?? 'false') ?? false;
+                        ctrl.update(); // ?? means if it is nullable - it will be false
                       },
                     ),
                     SizedBox(height: 10),
@@ -114,4 +118,4 @@ class AddproductPage extends StatelessWidget {
         });
   }
 }
-     
+// state management tell the UI to rebuild

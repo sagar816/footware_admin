@@ -14,6 +14,10 @@ class HomeController extends GetxController {
   TextEditingController productImgCtrl = TextEditingController();
   TextEditingController productPriceCtrl = TextEditingController();
 
+  String category = 'general';
+  String brand = 'un branded';
+  bool offer = false;
+
   @override
   void onInit() {
     productCollection = firestore.collection('products');
@@ -25,19 +29,20 @@ class HomeController extends GetxController {
       DocumentReference doc = productCollection.doc();
       Product product = Product(
         id: doc.id,
-        name: 'test name from flutter',
-        category: 'Boots',
-        description: 'test name from flutter',
-        price: 500,
-        brand: 'Adidas',
-        image: 'img url',
-        offer: true,
+        name: productNameCtrl.text,
+        category: category,
+        description: productDescriptionCtrl.text,
+        price: double.tryParse(productPriceCtrl.text),
+        brand: brand,
+        image: productImgCtrl.text,
+        offer: offer,
       );
 
       final productJson = product.toJson();
       doc.set(productJson);
       Get.snackbar('Success', 'Product Added Successfully',
           colorText: Colors.green);
+      setValuesDefault();
     } catch (e) {
       Get.snackbar('Error', e.toString(), colorText: Colors.red);
       print(e);
@@ -47,6 +52,22 @@ class HomeController extends GetxController {
   // testMethod() {
   //   print(test);
   // }
+
+  setValuesDefault() {
+    productNameCtrl.clear();
+    productPriceCtrl.clear();
+    productDescriptionCtrl.clear();
+    productImgCtrl.clear();
+    category = "general";
+    brand = "un-branded";
+    offer = false;
+    update();
+  }
 }
 
 //connect controller with UI page
+
+//firebase - read the data from the firebase and list in the UI
+// so create a list of products. This products we need to assign in the list,
+// so create one list and type will be <product> becasue we are using a product
+// then make one method - fetch products
