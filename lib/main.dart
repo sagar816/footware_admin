@@ -4,7 +4,6 @@ import 'package:footware_admin/controller/home_controller.dart';
 import 'package:footware_admin/firebase_options.dart';
 import 'package:footware_admin/pages/home_page.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,4 +30,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//2.29.40
+//2.40.59

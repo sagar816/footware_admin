@@ -19,14 +19,16 @@ class HomePage extends StatelessWidget {
               backgroundColor: Colors.deepOrange,
             ),
             body: ListView.builder(
-                itemCount: 20,
+                itemCount: ctrl.products.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text("Title"),
-                    subtitle: Text("Price: 100"),
+                    title: Text(ctrl.products[index].name ?? ''),
+                    subtitle:
+                        Text((ctrl.products[index].price ?? 0).toString()),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                       onPressed: () {
+                        ctrl.deleteProduct(ctrl.products[index].id ?? '');
                         // ctrl.testMethod();
                         // ctrl.test;
                         // print("Delete");
